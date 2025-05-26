@@ -1,12 +1,11 @@
-
 services:
   - type: web
     name: conversational-ai
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
+    startCommand: gunicorn --workers 4 --bind 0.0.0.0:$PORT app:app
     region: oregon
     plan: free
     envVars:
       - key: PYTHONUNBUFFERED
-        value: 
+        value: 1
