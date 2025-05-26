@@ -1,3 +1,4 @@
+
 from flask import Flask, request, jsonify
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 import requests
@@ -50,7 +51,11 @@ def chat():
         prediction = predict(input_text)
         response = responses.get(prediction, "I'm not sure how to respond.")
         return jsonify({"response": response})
+```
 
+I've removed the `if __name__ == "__main__":` block since we're running the application with `gunicorn`. If you need to run the application locally, you can add it back in:
+
+```
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
